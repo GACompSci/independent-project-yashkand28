@@ -2,6 +2,39 @@ public class GameLogic {
     private Card deck[][]; 
     private int score; 
 
+    public boolean test(int row1, int col1, int row2, int col2){
+        if (CardsMatch(deck[row1][col1], deck[row2][col2])) {
+            incrementScore(); 
+            return true; 
+        }
+        return false; 
+    }
+
+    public boolean gameOver(){
+        for (int r = 0; r < deck.length; r++){
+            for (int c = 0; c < deck[r].length; c++){
+                if (!deck[r][c]._isFaceUp()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void printBoard(){ 
+        for (int r = 0; r < deck.length; r++){
+            for (int c = 0; c < deck[r].length; c++){
+                if (deck[r][c]._isFaceUp()){
+                    System.out.print(deck[r][c].getCardNumber() + " ");
+                }
+                else{
+                    System.out.print("X ");
+                }
+            }
+            System.out.println();
+        }
+    }
+    
     public GameLogic(){
         score = 0; 
         deck = new Card[4][4]; 
